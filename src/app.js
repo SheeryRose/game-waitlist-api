@@ -1,4 +1,5 @@
 const express = require('express');
+const waitlistRoutes = require('./routes/waitlist.routes');
 
 const app = express();
 
@@ -11,5 +12,7 @@ app.get('/health', (req, res) => {
     error: null
   });
 });
+
+app.use('/waitlist', waitlistRoutes);
 
 module.exports = app;
