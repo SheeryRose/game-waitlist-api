@@ -1,4 +1,5 @@
 const store = require('../data/waitlist.store');
+const { sanitizeWaitlistInput } = require('../utils/sanitize');
 
 function listWaitlist(req, res) {
   const entries = store.getAll();
@@ -47,7 +48,21 @@ function getWaitlistEntry(req, res) {
   });
 }
 
+function createWaitlistEntry(req, res) {
+  const cleanData = sanitizeWaitlistInput(req.body);
+  const newEntry = store.create(cleanData);
+
+  console.log('[Analytics] User interacted with Game Waitlist CRUD API with Route Parameters');
+
+  res.status(201).json({
+    success: true,
+    data: newEntry,
+    error: null
+  });
+}
+
 module.exports = {
   listWaitlist,
-  getWaitlistEntry
+  getWaitlistEntry,
+  createWaitlistEntry
 };
