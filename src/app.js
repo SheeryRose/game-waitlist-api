@@ -1,5 +1,6 @@
 const express = require('express');
 const waitlistRoutes = require('./routes/waitlist.routes');
+const { notFoundHandler, globalErrorHandler } = require('./middleware/errorHandler');
 
 const app = express();
 
@@ -14,5 +15,8 @@ app.get('/health', (req, res) => {
 });
 
 app.use('/waitlist', waitlistRoutes);
+
+app.use(notFoundHandler);
+app.use(globalErrorHandler);
 
 module.exports = app;
