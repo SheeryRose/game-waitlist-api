@@ -6,7 +6,7 @@ function notFoundHandler(req, res) {
   });
 }
 
-function globalErrorHandler(err, req, res, next) {
+function globalErrorHandler(err, req, res, _next) {
   console.error('[Error]', err.message);
 
   if (err.type === 'entity.parse.failed') {
